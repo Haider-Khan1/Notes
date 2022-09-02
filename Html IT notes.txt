@@ -1,0 +1,17 @@
+plans for the website
+(My IT journey)
+add the geometrical shapes from the website backtrack-linux.org
+(add your own twist to it)(uses Java Script)
+fix the coloring and the background when testing it
+finish the notes with some of the things (signal jamming, arp spoofing and ssl striping, using aircrack-ng
+add onto notes (MAC, Nmap, etc). 
+Find info on powercert animated videos. 
+add multiple sections, rather than 1 big section
+add seperate pages
+organize the code, and add notes to what certains parts of the code do
+after being comfortable with HTML and CSS, start learning PHP, and JS
+don't directly copy and paste code without
+1. understanding what it does
+2. adding your own twist to it, unless it has what you need
+3. No need to use all their code, just unnessecary
+TRY HARDER
