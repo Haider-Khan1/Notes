@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+<body>
+
+<h2>Diffie-Hellman</h2>
+
+<p>what exactly is Diffie-Hellman? This is a form of encryption similar to End-to-End Encryption.
+Let's say we have the users [Alice] and [Bob] and also [public]. Both Alice and Bob have their own private key and [public] is the public key.
+    Let's say the [public] section has the letter "g" and "n", Alice has the private letter "a" and Bob the private letter "b". 
+Now the private key won't be shared with anyone, no the public, not bob and vice versa.
+So no let's say Alice get's the letter "g" from the public key and so does Bob. Their new key is "ag" and "bg". 
+What happens next is that Alice and Bob both put their keys of "ag" and "bg" into the public and as an attacker,
+they would know that Alice has "ag" and Bob has "bg" and "g" and "n" are public.
+What both users will do is they will ass their private key to the letters that they sent to each other.
+Alice will add "a" and Bob will add "b" to their key and both will get "abg" as their key. And since these are both private an attacker wouldn't know about their new keys.
+</p>
+
+<style>body {
+    background-image: url('https://www.backtrack-linux.org/images/background.png');
+    background-repeat: no-repeat;
+    background-attachment: fixed;  
+    background-size: cover;
+    font-family: sans-serif;
+  }
+p {
+    max-width: 780px;
+    margin: auto;
+    text-align: justify;
+}
+h1,
+h2,
+h3,
+h4,
+h5 {
+    text-align: center;
+    margin-right: auto;
+    margin-left: auto;
+    margin-bottom: 2vh;
+    margin-top: 2vh;
+}
+h4 {
+    margin-top: 1vh;
+    margin-bottom: 0;
+    margin-right: auto;
+    margin-left: 1vw;
+}
+</style>
+
+
+</body>
+</html>
